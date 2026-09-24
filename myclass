@@ -1,0 +1,61 @@
+#include <iostream>
+#include <vector>
+#include <algorithm> // 用于 std::swap
+
+using namespace std;
+
+// 定义 MyClass 类
+class MyClass {
+public:
+    // 成员函数 fun，接收数组的引用
+    void fun(vector<int>& arr) {
+        if (arr.empty()) return; // 数组为空则直接返回
+        
+        int n = arr.size();
+        int minIndex = 0; // 记录最小值的下标，初始化为第一个元素下标
+        
+        // 遍历数组寻找最小值的下标
+        for (int i = 1; i < n; ++i) {
+            if (arr[i] < arr[minIndex]) {
+                minIndex = i;
+            }
+        }
+        
+        // 将最小值与数组尾元素互换位置
+        swap(arr[minIndex], arr[n - 1]);
+    }
+};
+
+int main() {
+    int n;
+    
+    // 1. 录入数组长度
+    if (cin >> n) {
+        vector<int> arr(n);
+        
+        // 2. 录入数组数据
+        for (int i = 0; i < n; ++i) {
+            cin >> arr[i];
+        }
+        
+        // 3. 打印交换前的数组
+        for (int i = 0; i < n; ++i) {
+            cout << arr[i];
+            if (i != n - 1) cout << ", "; // 最后一个元素后不加逗号
+        }
+        cout << endl;
+        
+        // 4. 实例化类对象并调用成员函数
+        MyClass obj;
+        obj.fun(arr);
+        
+        // 5. 打印交换后的数组
+        for (int i = 0; i < n; ++i) {
+            cout << arr[i];
+            if (i != n - 1) cout << ", ";
+        }
+        cout << endl;
+    }
+    
+    return 0;
+}
